@@ -1,0 +1,26 @@
+RASPBERRY PI WITH DEBIAN
+########################
+image: https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-12.2.0-amd64-DVD-1.iso
+	username: root
+	password: 
+commands:
+	nano /etc/network/interfaces.d/wlan0
+		# To enable wireless networking, uncomment the folloing lines and -naturally-
+		# replace with your network's details.
+		#
+		 allow-hotplug wlan0
+		 iface wlan0 inet dhcp
+		# iface wlan0 inet6 dhcp
+		     wpa-ssid <your wifi ssid/name>
+		     wpa-psk <your wifi password>
+	shutdown -r now
+	passwd 
+	apt update
+	apt upgrade -y
+	apt install keyboard-configuration console-setup
+	setupcon
+	adduser <username>
+	#following two lines just if you want to have sudo
+	apt install sudo
+	usermod -aG sudo <username>
+	hostnamectl set-hostname <new Hostname>
