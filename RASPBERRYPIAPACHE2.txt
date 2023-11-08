@@ -1,0 +1,22 @@
+apt update
+apt upgrade
+apt install apache2
+mkdir /var/www/<your website name>
+chown -R <yourUser>:<yourUser> /var/www/<your website name>
+nano /etc/apache2/sites-available/<your website name>.conf
+	<VirtualHost *:80>
+	    ServerAdmin webmaster@localhost
+	    ServerName <your website name>
+	    ServerAlias www.<your website>
+	    DocumentRoot /var/www/<your website name>
+	    ErrorLog ${APACHE_LOG_DIR}/error.log
+	    CustomLog ${APACHE_LOG_DIR}/access.log combined
+	</VirtualHost>
+a2ensite <your website name>.conf
+a2dissite 000-default.conf
+#copy the files to following path: /var/www/<your website name>
+#if you use php do the next line
+sudo apt install php libapache2-mod-php
+#following lines are just for tls certificate
+apt install certbot python3-certbot-apache
+certbot --apache
